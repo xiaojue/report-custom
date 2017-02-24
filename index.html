@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./css/jquery-ui.css">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./js/jquery.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/jquery-ui.min.js"></script>
+  <script src="./js/lodash.min.js"></script>
+  <title>报告模板自由定制</title>
+  <style>
+    .showHtml{
+      border: 1px solid #e5e5e5;
+      padding: 10px;
+      position: absolute;
+      left: 300px;
+      top: 80px;
+      z-index: 999999;
+      width: 500px;
+      height: 600px;
+      user-select: text;
+      -webkit-user-select: text;
+      word-break:break-all;
+      background-color: #EEEEEE;
+      overflow: auto;
+    }
+    .back-c-b{
+      background-color: #564f4d;
+    }
+    .btn-close{
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+<div id="mainCon" class="container-fluid">
+  <div class="row">
+    <div class="left-part">
+      <div class="paper-type">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">选择纸张尺寸<span class="caret"></span></button>
+          <ul class="dropdown-menu change-paper">
+            <li><a href="#" id="a4">A4 210mm x 297mm</a></li>
+            <li><a href="#" id="b5">B5 176mm x 250mm</a></li>
+            <li><a href="#" id="16k">16K 184mm x 260mm</a></li>
+            <li><a href="#" id="cus">自定义</a></li>
+          </ul>
+        </div>
+        <div id="paper-type-cus" class="form-inline m-t-5 hidden">
+          <div class="input-group input-group-sm input-cus">
+            <span class="input-group-addon">宽mm</span>
+            <input type="number" class="form-control" id="paper-cus-width" value="0">
+          </div>
+          <div class="input-group input-group-sm input-cus">
+            <span class="input-group-addon">长mm</span>
+            <input type="number" class="form-control" id="paper-cus-height" value="0">
+          </div>
+          <button class="btn btn-primary btn-sm m-t-5" id="cusGo">确定</button>
+        </div>
+      </div>
+      <div class="left-widget">
+        <ul class="list-unstyled center-block left-widget">
+          <li>
+            <div id="titleDrag">
+              <span class="title">标题</span>
+            <span class="hidden input">
+              <input class="" value="标题" placeholder="标题">
+              <span class="glyphicon glyphicon-plus-sign"></span>
+              <span class="glyphicon glyphicon-minus-sign"></span>
+            </span>
+            </div>
+          </li>
+          <li>
+            <div id="subtitleDrag">
+              <span class="title">副标题</span>
+            <span class="hidden input">
+              <input class="" value="副标题" placeholder="副标题">
+              <span class="glyphicon glyphicon-plus-sign"></span>
+              <span class="glyphicon glyphicon-minus-sign"></span>
+            </span>
+            </div>
+          </li>
+          <li>
+            <div id="name">
+              <span class="title">姓名:</span>
+              <span class="hidden input">
+                <input class="" value="姓名:" placeholder="姓名">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                <span class="glyphicon glyphicon-minus-sign"></span>
+              </span>
+              <span id="pat_name"></span>
+            </div>
+            <span class="line">
+              <span class="line-left"></span>
+              <span class="line-top"></span>
+            </span>
+          </li>
+          <li>
+            <div id="gender">
+              <span class="title">性别:</span>
+              <span class="hidden input">
+                <input class="" value="性别:" placeholder="性别">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                <span class="glyphicon glyphicon-minus-sign"></span>
+              </span>
+              <span class="genderFilter" id="pat_gender"></span>
+            </div>
+            <span class="line">
+              <span class="line-left"></span>
+              <span class="line-top"></span>
+            </span>
+          </li>
+          <li>
+            <div id="age">
+              <span class="title">年龄:</span>
+              <span class="hidden input">
+                <input class="" value="年龄:" placeholder="年龄">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                <span class="glyphicon glyphicon-minus-sign"></span>
+              </span>
+              <span class="hidden">
+                <span class="p" id="pat_age_value"></span>
+                <span class="p ageUnits" id="pat_age_units"></span>
+              </span>
+            </div>
+            <span class="line">
+              <span class="line-left"></span>
+              <span class="line-top"></span>
+            </span>
+          </li>
+          <li>
+            <div id="studyId">
+              <span class="title">CT编号:</span>
+              <span class="hidden input">
+                <input class="" value="CT编号:" placeholder="CT编号:">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                <span class="glyphicon glyphicon-minus-sign"></span>
+              </span>
+              <span class="p" id="local_study_id"></span>
+            </div>
+            <span class="line">
+              <span class="line-left"></span>
+              <span class="line-top"></span>
+            </span>
+          </li>
+          <li>
+            <div id="inspectDepartmentName">
+              <span class="title">送检科室:</span>
+              <span class="hidden input">
+                <input class="" value="送检科室:" placeholder="送检科室:">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                <span class="glyphicon glyphicon-minus-sign"></span>
+              </span>
+              <span class="p" id="inspect_department_name"></span>
+            </div>
+            <span class="line">
+              <span class="line-left"></span>
+              <span class="line-top"></span>
+            </span>
+          </li>
+          <li>
+            <div id="admissionNo">
+              <span class="title">住院号:</span>
+              <span class="hidden input">
+                <input class="" value="住院号:" placeholder="住院号:">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                <span class="glyphicon glyphicon-minus-sign"></span>
+              </span>
+              <span class="p" id="admission_no"></span>
+            </div>
+            <span class="line">
+              <span class="line-left"></span>
+              <span class="line-top"></span>
+            </span>
+          </li>
+          <li>
+            <div id="bedNo">
+              <span class="title">床号</span>:
+              <span class="hidden input">
+                <input class="" value="床号" placeholder="床号">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                <span class="glyphicon glyphicon-minus-sign"></span>
+              </span>
+              <span class="p" id="bed_no"></span>
+            </div>
+            <span class="line">
+              <span class="line-left"></span>
+              <span class="line-top"></span>
+            </span>
+          </li>
+          <li>
+            <div id="cost">
+              <span class="title">费别</span>:
+              <span class="hidden input">
+                <input class="" value="费别" placeholder="费别">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                <span class="glyphicon glyphicon-minus-sign"></span>
+              </span>
+              <span class="p"></span>
+            </div>
+            <span class="line">
+              <span class="line-left"></span>
+              <span class="line-top"></span>
+            </span>
+          </li>
+          <li>
+            <div id="partName">
+              <span class="title">检查部位</span>:
+              <span class="hidden input">
+                <input class="" value="检查部位" placeholder="检查部位">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                <span class="glyphicon glyphicon-minus-sign"></span>
+              </span>
+              <span class="p" id="part_name"></span>
+            </div>
+            <span class="line">
+              <span class="line-left"></span>
+              <span class="line-top"></span>
+            </span>
+          </li>
+          <li>
+            <div id="studyTime">
+              <span class="title">检查日期</span>:
+              <span class="hidden input">
+                <input class="" value="检查日期" placeholder="检查日期">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                <span class="glyphicon glyphicon-minus-sign"></span>
+              </span>
+              <span class="p birthDate" id="study_time"></span>
+            </div>
+            <span class="line">
+              <span class="line-left"></span>
+              <span class="line-top"></span>
+            </span>
+          </li>
+          <li>
+            <div id="imgDescT">
+              <span class="title">影像描述</span>:
+              <span class="hidden input">
+                <input class="" value="影像描述" placeholder="影像描述">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                <span class="glyphicon glyphicon-minus-sign"></span>
+              </span>
+            </div>
+            <span class="line">
+              <span class="line-left"></span>
+              <span class="line-top"></span>
+            </span>
+          </li>
+          <li class="abs-li">
+            <div id="imgDescI">
+              <span id="img_desc" class="textarea bigInput input-resize">影像描述输入框</span>
+            </div>
+            <span class="line">
+              <span class="line-left"></span>
+              <span class="line-top"></span>
+            </span>
+          </li>
+          <li>
+            <div id="diagDescT">
+              <span class="title">诊断意见</span>:
+              <span class="hidden input">
+                <input class="" value="诊断意见" placeholder="诊断意见">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                <span class="glyphicon glyphicon-minus-sign"></span>
+              </span>
+            </div>
+            <span class="line">
+              <span class="line-left"></span>
+              <span class="line-top"></span>
+            </span>
+          </li>
+          <li class="abs-li">
+            <div id="diagDescI">
+              <span id="diag_desc" class="textarea bigInput input-resize">诊断意见输入框</span>
+            </div>
+            <span class="line">
+              <span class="line-left"></span>
+              <span class="line-top"></span>
+            </span>
+          </li>
+          <li>
+            <div id="reportDoc">
+              <span class="title">报告医生</span>:
+              <span class="hidden input">
+                <input class="" value="报告医生" placeholder="报告医生">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                <span class="glyphicon glyphicon-minus-sign"></span>
+              </span>
+              <span class="p" id="report_user_real_name"></span>
+            </div>
+            <span class="line">
+              <span class="line-left"></span>
+              <span class="line-top"></span>
+            </span>
+          </li>
+          <li>
+            <div id="reviewDoc">
+              <span class="title">审核医生</span>:
+              <span class="hidden input">
+                <input class="" value="审核医生" placeholder="审核医生">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                <span class="glyphicon glyphicon-minus-sign"></span>
+              </span>
+              <span class="p" id="review_user_real_name"></span>
+            </div>
+            <span class="line">
+              <span class="line-left"></span>
+              <span class="line-top"></span>
+            </span>
+          </li>
+          <li>
+            <div id="reportTime">
+              <span class="title">报告时间</span>:
+              <span class="hidden input">
+                <input class="" value="报告时间" placeholder="报告时间">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                <span class="glyphicon glyphicon-minus-sign"></span>
+              </span>
+              <span class="p birthDate" id="report_time"></span>
+            </div>
+            <span class="line">
+              <span class="line-left"></span>
+              <span class="line-top"></span>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">生成分割线<span class="caret"></span></button>
+        <ul class="dropdown-menu make-hr">
+          <li><a href="#" id="thin">细</a></li>
+          <li><a href="#" id="middle">中</a></li>
+          <li><a href="#" id="thick">粗</a></li>
+        </ul>
+      </div>
+      <button class="btn btn-primary" id="toHtml">生成ＨＴＭＬ</button>
+    </div>
+    <div class="right-paper">
+      <div class="left-ruler">
+        <div class="top-ruler">
+          <ul class="num-x list-unstyled"></ul>
+          <ul class="ruler-x list-unstyled"></ul>
+        </div>
+        <div class="paper center-block">
+          <span class="line-x hidden"></span>
+          <span class="line-y hidden"></span>
+          <span class="center-box"></span>
+          <span class="center-y"></span>
+        </div>
+        <div class="right-ruler">
+          <ul class="ruler-y list-unstyled"></ul>
+          <ul class="num-y list-unstyled"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+  </div>
+</div>
+<div class="showHtml hidden back-c-w">
+<div id="showHtml"></div>
+  <button class="btn btn-primary btn-close" id="close">关闭</button>
+</div>
+<div id="hidden" class="hidden"></div>
+</body>
+<script src="self.js"></script>
+</html>

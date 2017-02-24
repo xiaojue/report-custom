@@ -1,0 +1,191 @@
+body {
+    background-color: #EEEEEE;
+    user-select: none;
+    -webkit-user-select: none;
+    padding: 30px;
+    padding-top: 13px;
+    font-size: 16px;
+    position: relative;
+}
+#toHtml{
+    margin-top: 60px;
+    margin-left: 30px;
+    position: relative;
+    z-index: 9999999;
+}
+
+.left-widget li.abs-li{
+    margin-bottom: 55px;
+}
+.input-resize{
+    display: inline-block;
+    height: 50px;
+    width: 180px;
+    border: 1px solid #e5e5e5;
+    line-height: 1;
+    position: absolute;
+}
+/* 每个元素位置固定之后参考线的位置*/
+.line-left{
+    /*border-left: 1px solid #e5e5e5;*/
+    display: block;
+    position: absolute;
+}
+.line-top{
+    /*border-top: 1px solid #e8e8e8;*/
+    display: block;
+    position: absolute;
+}
+/* 分割线*/
+.make-hr{
+    position: relative;
+}
+.hr{
+    width: 180px;
+    height: 20px;
+    display: inline-block !important;
+    z-index: 100;
+}
+.thin{
+    border-top: 1px solid #0f0f0f;
+}
+.middle{
+    border-top: 2px solid #0f0f0f;
+}
+.thick{
+    border-top: 3px solid #0f0f0f;
+}
+/* 纸张选择下拉框样式*/
+.dropdown-menu{
+    z-index: 10000;
+}
+.input-cus{
+    width: 110px;
+}
+.m-t-5{
+    margin-top: 5px;
+}
+.line-x, .line-y, .center-y, .center-box{
+    position: absolute;
+    display: inline-block;
+    z-index: 1;
+}
+.line-x{
+    border-bottom: 1px solid #2aabd2;
+    width: 100%;
+    left:0;
+}
+.line-y{
+    border-left: 1px solid #2aabd2;
+    height: 100%;
+    top:0;
+}
+.center-y{
+    /*border-left: 1px solid #e5e5e5;*/
+    height: 100%;
+    top:0;
+    left: 575px;
+}
+.center-box{
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+    height: 100%;
+    top:0;
+    left: 0;
+    z-index: 0;
+}
+#draggable {
+    width: 150px;
+    height: 150px;
+    padding: 0.5em;
+}
+
+.left-part,.left-widget,.paper-type {
+    width: 230px;
+    float: left;
+}
+
+.right-paper {
+    float: left;
+}
+
+.left-widget li {
+    margin: 5px;
+}
+
+.left-widget li div {
+    display: inline;
+    z-index: 1000;
+    cursor: move;
+
+}
+
+#hidden {
+    position: relative;
+}
+.top-ruler{
+
+}
+.ruler-x,.num-x,.ruler-y,.num-y{
+    padding: 0;
+    margin: 0;
+}
+.num-x{
+
+}
+.num-x li{
+    width: 30px;
+    font-size: 10px;
+    float: left;
+}
+.ruler-x li{
+    width: 15px;
+    height: 10px;
+    border-left: 1px solid #000000;
+    float: left;
+    display: block;
+}
+.ruler-x li:nth-child(odd){
+    height: 15px;
+    margin-top: -5px;
+}
+.paper {
+    width: 630px;
+    height: 891px;
+    background-color: #ffffff;
+    margin: 0;
+    float: left;
+}
+.right-ruler, .left-ruler{
+    float: left;
+}
+.right-ruler{
+    /*margin-top: 27px;
+    margin-left: -30px;*/
+}
+.num-y,.ruler-y{
+    float: left;
+}
+.num-y{
+    margin-top: -7px;
+}
+.num-y li{
+    height: 30px;
+    font-size: 10px;
+}
+.ruler-y li{
+    width: 10px;
+    height: 15px;
+    border-top: 1px solid #000000;
+    display: block;
+}
+.ruler-y li:nth-child(odd){
+    width: 15px;
+}
+.input input{
+    width: 150px;
+}
+.input span{
+    cursor: pointer;
+    display: inline-block;
+}
