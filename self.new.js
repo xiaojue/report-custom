@@ -18,7 +18,7 @@
             'dblclick .input input': 'inputdbclick',
             'click .input span': 'changeFontSize',
             'click .make-hr a': 'makehr',
-            'click .change-paper a': 'changepapaer',
+            'click .change-paper a': 'changepaper',
             'click #cusGo': 'cusGo',
             'click #toHtml': 'toHtml',
             'click #close': 'close'
@@ -27,8 +27,8 @@
     };
 
     reportCustomApplication.Eles = {
-        pap: '.paper',
-        centerY: 'center-y'
+        pap: $('.paper'),
+        centerY: $('.center-y')
     };
 
     reportCustomApplication.prototype = {
@@ -121,7 +121,7 @@
             $(target).toggleClass('hidden');
             $(target).next('.input').toggleClass('hidden');
         },
-        inputdblclick: function(e) {
+        inputdbclick: function(e) {
             var target = e.target;
             $(target).parent('.input').prev()[0].innerHTML = $(target)[0].value;
             $(target).parent('.input').prev().css('font-size', $(target).css('font-size'));
@@ -321,7 +321,7 @@
             for (var keys in maps) {
                 if (maps.hasOwnProperty(keys)) {
                     var matchs = keys.match(delegateEventSplitter);
-                    bind(matchs[1], matchs[2], maps[keys].bind(this));
+                    bind(matchs[1], matchs[2], this[maps[keys]].bind(this));
                 }
             }
         },
@@ -344,9 +344,9 @@
                 snap: ".center-box,.line-left,.line-top",
                 snapMode: "inner",
                 snapTolerance: 15,
-                start: self._dragStart,
-                drag: self._dragging,
-                stop: self._dragStop,
+                start: self._dragStart.bind(self),
+                drag: self._dragging.bind(self),
+                stop: self._dragStop.bind(self),
                 zIndex: 100
             });
         },
@@ -385,4 +385,4 @@
         new reportCustomApplication(); 
     });
 
-})(this, this.jQuery, this._, document);
+})(this, this.jQuery, this._,  this.jQuery(document));
